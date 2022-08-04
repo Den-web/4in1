@@ -2,14 +2,14 @@ import {intitializeBoard} from "../useCases/useCases";
 import {Player} from "../domain/Player";
 import {Game} from "../domain/Game";
 
-const defaultState = {
+const initialState = {
   isStartGame: false,
   board: intitializeBoard(),
   playerTurn: Player.One,
   gameState: Game.Ongoing
 };
 
-function reducer(state = defaultState, action) {
+function reducer(state = initialState, action) {
   switch(action.type) {
     case "SET_MAKE_MOVE":
       return {
@@ -30,10 +30,7 @@ function reducer(state = defaultState, action) {
     case "SET_RESTART_GAME":
       return {
         ...state,
-        isStartGame: !state.isStartGame,
-        board: intitializeBoard(),
-        playerTurn: Player.One,
-        gameState: Game.Ongoing
+        ...initialState
       }
 
     default: return state
